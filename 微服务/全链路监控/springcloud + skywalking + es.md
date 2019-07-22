@@ -1,4 +1,4 @@
-Springcloud + Skywalking + es 对项目实现全链路监控
+Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
 ==============
 
 
@@ -40,7 +40,7 @@ Springcloud + Skywalking + es 对项目实现全链路监控
 ## 2、项目环境说明
 * spring cloud
       版本： Finchley.SR1
-* ElasticSearche：
+* ElasticSearche(下文简称ES)：
       版本：elasticsearch-6.8.1
       下载地址：https://www.elastic.co/cn/downloads/past-releases
 * Skywalking：
@@ -204,7 +204,11 @@ Springcloud + Skywalking + es 对项目实现全链路监控
       <dependency>
            <groupId>org.springframework.cloud</groupId>
            <artifactId>spring-cloud-starter-openfeign</artifactId>
-       </dependency>    
+       </dependency>Elasticsearch 是一个分布式可扩展的实时搜索和分析引擎,一个建立在全文搜索引擎 Apache Lucene(TM) 基础上的搜索引擎.当然 Elasticsearch 并不仅仅是 Lucene 那么简单，它不仅包括了全文搜索功能，还可以进行以下工作:
+
+分布式实时文件存储，并将每一个字段都编入索引，使其可以被搜索。
+实时分析的分布式搜索引擎。
+可以扩展到上百台服务器，处理PB级别的结构化或非结构化数据。
     ```
 * application.yml配置服务信息和eureka-server的配置信息：
     ```yml
@@ -354,3 +358,12 @@ Springcloud + Skywalking + es 对项目实现全链路监控
 * 依次启动eureka，gateway，serviceA， serviceB
 * 登录Eureka管理页面检查服务注册成功情况
 * 调用网关ip:端口/a/serviceA，看调用链路是否正常
+
+
+# 三、ES和Skywalking配置
+
+## ES配置
+* 下载 elasticsearch-6.8.1，下载地址：https://www.elastic.co/cn/downloads/past-releases
+* 解压
+
+## 安装
