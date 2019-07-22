@@ -55,17 +55,24 @@ Elasticsearch 安装，配置文件详解，常见启动错误
 
 # ElasticSearch常见异常
 * can not run elasticsearch as root
+
       es无法用root账户气动，切换到非root账户即可
+
 * main ERROR Could not register mbeans java.security.AccessControlException: access denied ("javax.management.MBeanTrustPermission" "register")
+
       当前用户无权限操作文件夹，改变es文件夹所有者为当前用户
+
 * max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+
       最大虚拟内存不够，sysctl.conf配置文件
       sudo vi /etc/sysctl.conf
       添加下面配置：
       vm.max_map_count=655360
       并执行命令：
       sudo sysctl -p
+
 * max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
+
       文件打开数不够，修改limits.conf配置文件
       sudo vi /etc/security/limits.conf
       添加如下内容:
@@ -78,12 +85,15 @@ Elasticsearch 安装，配置文件详解，常见启动错误
       添加 session required pam_limits.so
       sudo vi /etc/pam.d/common-session-noninteractive
 
-添加 session required pam_limits.so
+
 * max file descriptors [4096] for elasticsearch process is too low, increase to at least [65535]
+
       用户[esadmin]的最大线程数[1024]太少，至少增加到[4096]
       vim /etc/security/limits.d/90-nproc.conf
       把* soft nproc 1024修改成* soft nproc 2048
+
 *  max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+
       最大虚拟内存区vm.max_map_count[65530]太低，至少增加到[262144]
       使用root用户vi /etc/sysctl.conf
       添加下面配置
@@ -91,6 +101,7 @@ Elasticsearch 安装，配置文件详解，常见启动错误
       然后执行 sysctl –p
 
 * java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled into kernel, CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER are needed
+
       因为Centos6不支持SecComp,而ES默认bootstrap.system_call_filter为true进行检测,所以导致检测失败,失败后直接导致ES不能启动解决:
       修改elasticsearch.yml,添加：
       bootstrap.memory_lock: false
