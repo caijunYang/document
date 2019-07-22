@@ -95,8 +95,7 @@ Elasticsearch 安装，配置文件详解，常见启动错误
 *  max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
       最大虚拟内存区vm.max_map_count[65530]太低，至少增加到[262144]
-      使用root用户vi /etc/sysctl.conf
-      添加下面配置
+      使用root用户vi /etc/sysctl.conf添加下面配置
       vm.max_map_count=655360
       然后执行 sysctl –p
 
