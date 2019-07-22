@@ -204,11 +204,7 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
       <dependency>
            <groupId>org.springframework.cloud</groupId>
            <artifactId>spring-cloud-starter-openfeign</artifactId>
-       </dependency>Elasticsearch 是一个分布式可扩展的实时搜索和分析引擎,一个建立在全文搜索引擎 Apache Lucene(TM) 基础上的搜索引擎.当然 Elasticsearch 并不仅仅是 Lucene 那么简单，它不仅包括了全文搜索功能，还可以进行以下工作:
-
-分布式实时文件存储，并将每一个字段都编入索引，使其可以被搜索。
-实时分析的分布式搜索引擎。
-可以扩展到上百台服务器，处理PB级别的结构化或非结构化数据。
+       </dependency>
     ```
 * application.yml配置服务信息和eureka-server的配置信息：
     ```yml
@@ -354,16 +350,61 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
           }         
       }
     ```
-### e、检查项目信息
+### f、检查项目信息
 * 依次启动eureka，gateway，serviceA， serviceB
 * 登录Eureka管理页面检查服务注册成功情况
 * 调用网关ip:端口/a/serviceA，看调用链路是否正常
 
+## 3、ES与skywalking配置
 
-# 三、ES和Skywalking配置
+### ES配置
+* 在es下conf目录中找到elasticsearch.yml
+* 修改cluster.name的值为：sky_Collector_cluster
+* 启动es
 
-## ES配置
-* 下载 elasticsearch-6.8.1，下载地址：https://www.elastic.co/cn/downloads/past-releases
-* 解压
+### Skywalking配置
 
-## 安装
+* 在skywalking的config目录找到application.yml
+* 修改application.yml文件
+* 找到storage节点下的，elasticsearch节点
+* 修改nameSpace为sky_Collector_cluster，必须与es配置的cluster.那么一致
+* 修改clusterNodes为es的ip和端口
+* 修改indexShardsNumber 值必须大于1
+* 注释掉storage下的其他节点
+* 启动Skywalking,在Skywalking的bin目录中存在collectorService和webAppService的启动脚本么，使用startup
+可以同时启动两个脚本
+
+### 检查Skywalking与es链接情况
+
+* Skywalking与es如果正常连接，skywalking会在es创建大量的索引，检查索引的创建即可，便可知配置是否成功
+
+## 4、启动项目
+
+### a、jar 启动
+
+* 将skywalking目录下的agent拷贝4份到本地
+* 将项目打包将每个服务分贝和一个agent放到一起
+
+    ![](./images/skwk3.png)
+* 启动:  java -javaagent:skywalking-agent.jar目录 -jar 项目目录
+
+        C:\Users\yang\Desktop\sky\eurka> java -javaagent:C:\Users\yang\Desktop\sky\eurka\agent\skywalking-agent.jar
+        -jar skywalking-eurka-1.0-SNAPSHOT.jar
+
+### b、与idea集成启动 启动
+* 启动方式，在VM options配置以下代码
+      -javaagent:skywalking-agent.jar的目录文件
+      -Dskywalking.agent.service_name=服务名称
+      -Dskywalking.collector.backend_service=skywalking的探针服务
+* 例如：
+  ![](./images/skwk4.png)
+## 检查效果
+
+* 主界面
+  ![](./images/skwk5.png)
+
+* 接口相关
+  ![](./images/skwk6.png)
+
+* 单台服务，及服务的jvm占用等
+  ![](./images/skwk7.png)
