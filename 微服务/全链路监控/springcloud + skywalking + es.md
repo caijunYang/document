@@ -36,7 +36,7 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
    应用使用非入侵性的Agent形式介入，Agent采集数据并转化为SkyWalking Trace数据协议，通过HTTP或者gRPC发送到collector，collector对手机到的数据进行分析和聚合，最后存储到Stroage（通常使用ElasticSearch或者H2），WEB UI通过Http+GrahQL进行数据获取展示
 # 二、Spring Cloud与Skywalking整合
 ## 1、服务说明
-   ![](./images/skwk1.png)
+    ![](./images/skwk1.png)
 ## 2、项目环境说明
 * spring cloud
       版本： Finchley.SR1
