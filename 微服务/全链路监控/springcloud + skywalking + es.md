@@ -51,7 +51,6 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
 * 注意： es如果使用的5.x，则skywalking也应该切到5.x版本使用
 ## 3、构建项目环境
     项目结构:
-
   ![](./images/skwk2.png)
 ### a、顶层项目Skywalking
 * pom.xml引入Springboot：
@@ -406,9 +405,7 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
 
 * 主界面
   ![](./images/skwk5.png)
-
 * 接口相关
   ![](./images/skwk6.png)
-
 * 单台服务，及服务的jvm占用等
   ![](./images/skwk7.png)
