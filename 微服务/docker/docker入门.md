@@ -59,16 +59,17 @@ Docker 入门
 # 四、Docker 镜像操作
 
 ## 4.1 列出docker下已安装的镜像
-* docker images
-* docker images -q  \\只显示镜像ID
+       docker images
+       docker images -q  \\只显示镜像ID
 
 ## 4.2 搜索镜像
-* docker search [OPTIONS] 镜像名称
-* OPTIONS 选项说明
-      -s 列出关注数大于指定值的镜像
-          docker search -s 100 centos
-      --no-trunc 显示完整的镜像描述DESCRIPTION
-          docker search --no-trunc centos
+       docker search [OPTIONS] 镜像名称
+
+       OPTIONS 选项说明
+            -s 列出关注数大于指定值的镜像
+                docker search -s 100 centos
+            --no-trunc 显示完整的镜像描述DESCRIPTION
+                docker search --no-trunc centos
 
 ## 4.3 拉取镜像
 * docker pull 镜像名:标签名
@@ -106,43 +107,58 @@ Docker 入门
       systemctl restart docker
 
 ## 4.5 删除镜像
-* docker rmi 镜像ID
-* 删除所有镜像 : docker rmi 'docker images -q'
+* 删除镜像
+      docker rmi 镜像ID
+* 删除所有镜像  
+      docker rmi 'docker images -q'
 # 五 容器操作
 
 ## 5.1 查看容器
-* 查看运行中的容器 :  docker ps     
-* 查看所有容器 : docker ps -a   
-* 查看最后一次运行的容器：docker ps –l
-* 查看停止的容器： docker ps -f status=exited
+* 查看运行中的容器
+      docker ps     
+* 查看所有容器  
+      docker ps -a   
+* 查看最后一次运行的容器：
+      docker ps –l
+* 查看停止的容器：
+      docker ps -f status=exited
 
 ## 5.2 创建与启动容器
 ## 5.2.1 创建容器
-* docker run [OPTIONS] 镜像名:标签名
-        MySQL举例：   docker run -id --name=mxg_mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7
-        创建了一个mysql容器，名称为mxg_mysql 端口为3306 root账号的密码为123456
-* [OPTIONS] 常用参数说明
-      -i 表示交互式运行容器（就是创建容器后，马上会启动容器，并进入容器 ），通常与 -t 同时使用 。
-      -t 启动后会进入其容器命令行, 通常与  -i 同时使用; 加入  -it 两个参数后，容器创建就能登录进去。即分配一个伪终端
-      --name 为创建的容器指定一个名称
-      -d 创建一个守护式容器在后台运行，并返回容器ID； 这样创建容器后不会自动登录容器，如果加 -i 参数，创建后就会运行容器
-      -v 表示目录映射, 格式为： -p 宿主机目录:容器目录，注意：最好做目录映射，在宿主机上做修改，然后共享到容器上
+       docker run [OPTIONS] 镜像名:标签名
+              MySQL举例：   docker run -id --name=mxg_mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7
+              创建了一个mysql容器，名称为mxg_mysql 端口为3306 root账号的密码为123456
+
+
+       [OPTIONS] 常用参数说明
+            -i 表示交互式运行容器（就是创建容器后，马上会启动容器，并进入容器 ），通常与 -t 同时使用 。
+            -t 启动后会进入其容器命令行, 通常与  -i 同时使用; 加入  -it 两个参数后，容器创建就能登录进去。即分配一个伪终端
+            --name 为创建的容器指定一个名称
+            -d 创建一个守护式容器在后台运行，并返回容器ID； 这样创建容器后不会自动登录容器，如果加 -i 参数，创建后就会运行容器
+            -v 表示目录映射, 格式为： -p 宿主机目录:容器目录，注意：最好做目录映射，在宿主机上做修改，然后共享到容器上
       -p 表示端口映射，格式为： -p 宿主机端口:容器端口
 
 ## 5.2.1 启动用与停止容器
-* 启动容器 : docker start 容器名称|容器id
-* 启动所有容器 ： docker start `docker ps -a -q`
-* 停止容器 ：docker stop 容器名称|容器id
-* 停止所有容器 ：docker stop `docker ps -a -q`
-* 强制停止 ：docker kill 容器名称|容器id
+* 启动容器
+      docker start 容器名称|容器id
+* 启动所有容器
+      docker start `docker ps -a -q`
+* 停止容器
+      docker stop 容器名称|容器id
+* 停止所有容器
+      docker stop `docker ps -a -q`
+* 强制停止
+      docker kill 容器名称|容器id
 
 ## 5.2.3 创建守护式容器
 * 创建（-d）并运行（-i）守护式容器命令如下（容器名称不能重复）
         docker run -id --name=mycentos2 centos:7
 
 ## 5.3 登录容器
-* docker exec -it 容器名称|容器id /bin/bash
-       docker exec -it mysql /bin/bash   
+
+       docker exec -it 容器名称|容器id /bin/bash
+
+       例如： docker exec -it mysql /bin/bash   
 
 ## 5.4 拷贝宿主机与容器中的文件
 * 将宿主机文件拷贝到容器内
@@ -155,8 +171,9 @@ Docker 入门
 我们可以在创建容器的时候，将宿主机的目录与容器内的目录进行映射，这样我们就可以通过修改宿主机某
 个目录的文件从而去影响容器。使用  -v 选项
 
-* docker run -id -v /宿主机绝对路径目录:/容器内目录 --name=容器名  镜像名
-      docker run -id -v /opt:/opt --name=mycentos3 centos:7
+      docker run -id -v /宿主机绝对路径目录:/容器内目录 --name=容器名  镜像名
+
+      如： docker run -id -v /opt:/opt --name=mycentos3 centos:7
       将 宿主机目录/opt 挂载 容器目录/opt
 
 ## 5.6查看容器其他信息
@@ -165,8 +182,9 @@ Docker 入门
 * 查看容器IP地址
       docker inspect --format='{{.NetworkSettings.IPAddress}}' mycentos2
 ## 5.7 删除容器
-* docker rm 容器名称 | 容器ID
+      docker rm 容器名称 | 容器ID
 
 ## 5.8 容器保存为镜像
-* 容器保存为镜像: docker commit [-m="提交的描述信息"] [-a="创建者"] 容器名称|容器ID 生成的镜像名[:标签名]  
+      容器保存为镜像: docker commit [-m="提交的描述信息"] [-a="创建者"] 容器名称|容器ID 生成的镜像名[:标签名] 
+
       如：docker commit -m="新建镜像" -a="itplayer" 75d43f37b85d itplayer_mysql:5.5

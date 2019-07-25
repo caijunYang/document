@@ -153,11 +153,11 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
           lilizhou: BBC  # 不会影响客户端行为
         lease-renewal-interval-in-seconds: 5 #续约更新时间间隔（默认30秒）
         lease-expiration-duration-in-seconds: 90    # 续约到期时间（默认90秒）
-    captcha:
-      time: 600
-    feign:
-      hystrix:
-        enabled: true
+      captcha:
+        time: 600
+      feign:
+        hystrix:
+          enabled: true
     ```
 * 提供对外接口BserviceControler：
     ```java
@@ -386,6 +386,10 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
 * 将项目打包将每个服务分贝和一个agent放到一起
 
     ![](./images/skwk3.png)
+* 修改每个项目对应的agent的目录下的config目录中的agent.config配置文件，主要修改2个参数
+    agent.service_name ：改为自己的服务名称
+    collector.backend_service ：改为skywalking的接收数据ip和端口，默认端口11800
+
 * 启动:  java -javaagent:skywalking-agent.jar目录 -jar 项目目录
 
         C:\Users\yang\Desktop\sky\eurka> java -javaagent:C:\Users\yang\Desktop\sky\eurka\agent\skywalking-agent.jar
