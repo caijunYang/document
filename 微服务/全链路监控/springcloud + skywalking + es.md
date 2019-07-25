@@ -386,8 +386,9 @@ Springcloud + Skywalking + ElasticSearch 对项目实现全链路监控
 
     ![](./images/skwk3.png)
 * 修改每个项目对应的agent的目录下的config目录中的agent.config配置文件，主要修改2个参数
-    agent.service_name ：改为自己的服务名称
-    collector.backend_service ：改为skywalking的接收数据ip和端口，默认端口11800
+
+      agent.service_name ：改为自己的服务名称
+      collector.backend_service ：改为skywalking的接收数据ip和端口，默认端口11800
 
 * 启动:  java -javaagent:skywalking-agent.jar目录 -jar 项目目录
 
