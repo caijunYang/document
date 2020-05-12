@@ -58,9 +58,11 @@ Elasticsearch 安装，配置文件详解，常见启动错误
    创建用户组： groupadd es
 
    在es用户组下创建用户：useradd 用户名 -g 用户组 -p 密码
+
       useradd esUser -g es -p esUserPwd
-      
+
    将ES目录分权给创建的es账号:  chown -R 用户名:用户组 目录
+   
       chown -R esuser:es elasticsearch-2.3.4
 
 
