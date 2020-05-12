@@ -52,6 +52,15 @@ Elasticsearch 安装，配置文件详解，常见启动错误
 * discovery.zen.ping.multicast.enabled: 设置是否打开多播发现节点，默认是true。
 * discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"] 设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点。
 
+# ES启动
+* es不能使用root账号启动，需要为es创建用户组及用户
+
+   创建用户组： groupadd es
+   在es用户组下创建用户：useradd 用户名 -g 用户组 -p 密码
+      useradd esUser -g es -p esUserPwd
+   将ES目录分权给创建的es账号:  chown -R 用户名:用户组 目录
+      chown -R esuser:es elasticsearch-2.3.4
+
 
 # ElasticSearch常见异常
 * can not run elasticsearch as root
