@@ -15,6 +15,7 @@ Elasticsearch 安装，配置文件详解，常见启动错误
 * https://www.elastic.co/cn/downloads/past-releases 下载es安装包
 * 解压安装包
 * 在bin目录下直接运行 elasticsearch.sh （Windows系统为：/elasticsearchbat）则可气动
+* 后台启动方式  ./elasticsearch -d
 
 
 # ElasticSearch配置详解
