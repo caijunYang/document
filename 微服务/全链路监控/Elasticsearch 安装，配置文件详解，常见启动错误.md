@@ -121,3 +121,62 @@ Elasticsearch 安装，配置文件详解，常见启动错误
       修改elasticsearch.yml,添加：
       bootstrap.memory_lock: false
       bootstrap.system_call_filter: false
+
+# ElasticSearch插件
+
+* 安装Head，提供集群，分片，索引信息等。提供基本查询和复合查询等功能
+
+    1：直接到ES安装路径下的bin里，运行
+
+      ./plugin install mobz/elasticsearch-head
+
+    2：打开http://server的ip:9200/plugin/head 查看效果
+
+* 安装Marvel插件（官方推荐，但是属于收费插件）Marvel把ES的信息输出到kibana里面，并再Kibana输出图形界面
+
+    1：直接到ES安装路径下的bin里，运行
+
+      ./plugin install license
+      ./plugin install marvel-agent
+
+    2：安装Kibana，解压然后拷贝到要防止的位置即可，修改下配置文件里面的elasticsearche.url  
+    3：在Kibana里面安装Marvel插件
+
+       在kibana的bin目录下执行:
+       ./kibana plugin --install elasticsearch/marvel/latest
+
+    4、启动ES和Kibana
+
+    5、然后就可以到http://server的ip:5601/app/marvel
+
+* 安装ik，中文插件
+    1：下载最新的ik：https://github.com/medcl/elasticsearch-analysis-ik
+        然后自己编译打包，生成jar包，需要修改一下pom文件，把最下面的
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+        注释掉
+
+    2：把下载到ik解压到plugins
+
+    3：把生成的jar拷贝到plugins/elasticsearch-analysis-ik-master下面，同时还要拷入需要的依赖jar，commons-codec-1.9.jar、commons-logging-1.2.jar、httpclient-4.4.1.jar、httpcore-4.4.1.jar
+
+    4：在ik源码的main/resources里面，拷贝plugin-descriptor.properties到plugins／elasticsearch-analysis-ik-master下面，然后把里面的参数数据修改一下，参考如下：
+        description=ik_analyzer
+        version=1.9.4
+        name=ik_analyzer
+        site=false
+        jvm=true
+        classname=org.elasticsearch.plugin.analysis.ik.AnalysisIkPlugin
+        java.version=1.8
+        elasticsearch.version=2.3.4
+        isolated=false
+    5：修改es的config/elasticsearch.yml，在最后添加：
+        index.analysis.analyzer.ik.type : 'ik'
+        index.analysis.analyzer.default.tokenizer : 'ik'
+    然后就可以按照ik官方给的测试进行测试了
