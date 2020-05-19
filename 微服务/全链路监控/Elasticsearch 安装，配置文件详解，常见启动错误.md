@@ -70,6 +70,13 @@ Elasticsearch 安装，配置文件详解，常见启动错误
 
 
 # ElasticSearch常见异常
+* ERROR: [1] bootstrap checks failed [1]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured
+
+      往yml文件中添加下面的配置
+      node.name: node-1
+      cluster.initial_master_nodes: [“node-1”]
+
+
 * can not run elasticsearch as root
 
       es无法用root账户气动，切换到非root账户即可
@@ -121,6 +128,13 @@ Elasticsearch 安装，配置文件详解，常见启动错误
       修改elasticsearch.yml,添加：
       bootstrap.memory_lock: false
       bootstrap.system_call_filter: false
+
+* java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled into kernel, CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER are needed
+
+ElasticSearch集群启动错误,错误的原因是:因为Centos6不支持SecComp,而ES默认bootstrap.system_call_filter为true进行检测,所以导致检测失败,失败后直接导致ES不能启动解决:修改elasticsearch.yml
+
+    bootstrap.memory_lock: false
+    bootstrap.system_call_filter: false
 
 # ElasticSearch插件
 
