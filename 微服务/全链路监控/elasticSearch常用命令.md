@@ -59,7 +59,7 @@ Elasticsearch 使用kibana常用语法
 
       如：
 
-      ```json
+  ```json
       GET /log_auto_error_2020.06.29/doc/_search
       {
         "query": {
@@ -79,8 +79,7 @@ Elasticsearch 使用kibana常用语法
           }
         }
       }
-
-      ```
+  ```
 ##  3、	match查询
     match_all (查询全部)简如第一点中所述
     match_phrase(短语查询)，match_phrase_prefix(最左前缀查询)这两种都可以根据数据中含有某一部分查找，match_phrase类似于%xxx%, match_phrase_prefix类似于 xx%
@@ -88,7 +87,7 @@ Elasticsearch 使用kibana常用语法
 
     如：
 
-    ```json
+```json
     {
       "query": {
         "multi_match": {
@@ -98,7 +97,7 @@ Elasticsearch 使用kibana常用语法
       }
     }
 
-    ```
+```
     同样multi_match 甚至可以当作 match_phrase  和 match_phrase_prefix 使用，只是需要指定type类型，如当 match_phrase_prefix 使用则加一个 “type”: “phrase_prefix”
 
 ##  4、	简单聚合分组查询
