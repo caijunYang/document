@@ -194,3 +194,10 @@ ElasticSearch集群启动错误,错误的原因是:因为Centos6不支持SecComp
         index.analysis.analyzer.ik.type : 'ik'
         index.analysis.analyzer.default.tokenizer : 'ik'
     然后就可以按照ik官方给的测试进行测试了
+
+
+
+* filebeats 后台启动：  
+./filebeat -e -c filebeat.yml > filebeat.log 2>&1 &
+* logstash后台启动：
+./logstash -f  ../cfg/redis1.config > logstash.log 2>&1 &

@@ -1,0 +1,14 @@
+Elasticsearch6.x 安装插件
+=====================================
+
+# 安装IK
+* 1、进入IK的连接，查看版本信息：
+      https://github.com/medcl/elasticsearch-analysis-ik/releases
+* 2、找到和当前版本一致的ik版本
+* 3、在es的bin目录下执行：
+
+      我的ES安装版本未6.8.1,故代码如下：
+      ./elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.8.1/elasticsearch-analysis-ik-6.8.1.zip
+
+# 安装HEAD
+* 1、先确定系统是否安装xz

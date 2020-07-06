@@ -185,6 +185,6 @@ Docker 入门
       docker rm 容器名称 | 容器ID
 
 ## 5.8 容器保存为镜像
-      容器保存为镜像: docker commit [-m="提交的描述信息"] [-a="创建者"] 容器名称|容器ID 生成的镜像名[:标签名] 
+      容器保存为镜像: docker commit [-m="提交的描述信息"] [-a="创建者"] 容器名称|容器ID 生成的镜像名[:标签名]
 
       如：docker commit -m="新建镜像" -a="itplayer" 75d43f37b85d itplayer_mysql:5.5
